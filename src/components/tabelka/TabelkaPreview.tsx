@@ -8,12 +8,13 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Monitor, ImagePlus, X } from "lucide-react";
+import { TableSide } from "@/lib/constants";
 import { extractPlainText, calculateScaledValues } from "@/lib/tabelka-generator";
 
 interface TabelkaPreviewProps {
   width: number;
   height: number;
-  side: "left" | "right";
+  side: TableSide;
   content: {
     title: string;
     content: string;
@@ -53,7 +54,7 @@ export function TabelkaPreview({
 
   // Calculate SVG viewBox and table position
   const preview = useMemo(() => {
-    const isRight = side === "right";
+    const isRight = side === TableSide.Right;
     const scaled = calculateScaledValues(width, height, isRight);
 
     // Base table dimensions (from the ASS drawing commands)
@@ -283,7 +284,7 @@ export function TabelkaPreview({
 
           {/* Side indicator in SVG */}
           <rect
-            x={side === "left" ? 20 : width - 80}
+            x={side === TableSide.Left ? 20 : width - 80}
             y={20}
             width={60}
             height={24}
@@ -291,7 +292,7 @@ export function TabelkaPreview({
             fill="rgba(255,255,255,0.9)"
           />
           <text
-            x={side === "left" ? 50 : width - 50}
+            x={side === TableSide.Left ? 50 : width - 50}
             y={32}
             textAnchor="middle"
             dominantBaseline="middle"
@@ -299,7 +300,7 @@ export function TabelkaPreview({
             fontSize={14}
             fontWeight="500"
           >
-            {side === "left" ? t("tabelka.left") : t("tabelka.right")}
+            {side === TableSide.Left ? t("tabelka.left") : t("tabelka.right")}
           </text>
         </svg>
       </CardContent>

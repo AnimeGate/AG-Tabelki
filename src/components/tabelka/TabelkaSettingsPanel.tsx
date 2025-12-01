@@ -22,14 +22,19 @@ import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Table2, Sparkles } from "lucide-react";
+import {
+  TableSide,
+  ResolutionPresetId,
+  DEFAULTS,
+} from "@/lib/constants";
 import { BLUEPRINTS, RESOLUTION_PRESETS } from "@/lib/tabelka-blueprints";
-import type { TabelkaState } from "./Tabelka";
+import type { TabelkaState } from "@/lib/schemas";
 
 interface TabelkaSettingsPanelProps {
   state: TabelkaState;
   onPresetChange: (presetId: string) => void;
   onResolutionChange: (width: number, height: number) => void;
-  onSideChange: (side: "left" | "right") => void;
+  onSideChange: (side: TableSide) => void;
   onBlueprintChange: (blueprintId: string) => void;
   onContentChange: (
     field: "title" | "content" | "description",
@@ -53,7 +58,7 @@ export function TabelkaSettingsPanel({
 }: TabelkaSettingsPanelProps) {
   const { t } = useTranslation();
 
-  const isCustomResolution = state.presetId === "custom";
+  const isCustomResolution = state.presetId === ResolutionPresetId.Custom;
 
   // Get selected blueprint name for display
   const selectedBlueprint = BLUEPRINTS.find((bp) => bp.id === state.blueprintId);
@@ -132,17 +137,17 @@ export function TabelkaSettingsPanel({
             <Label className="text-sm font-medium">{t("tabelka.position")}</Label>
             <RadioGroup
               value={state.side}
-              onValueChange={(v) => onSideChange(v as "left" | "right")}
+              onValueChange={(v) => onSideChange(v as TableSide)}
               className="flex gap-4"
             >
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="left" id="left" />
+                <RadioGroupItem value={TableSide.Left} id="left" />
                 <Label htmlFor="left" className="cursor-pointer">
                   {t("tabelka.left")}
                 </Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="right" id="right" />
+                <RadioGroupItem value={TableSide.Right} id="right" />
                 <Label htmlFor="right" className="cursor-pointer">
                   {t("tabelka.right")}
                 </Label>
@@ -213,9 +218,9 @@ export function TabelkaSettingsPanel({
                 <Slider
                   value={[state.contentFontSize]}
                   onValueChange={(value) => onContentFontSizeChange(value[0])}
-                  min={24}
-                  max={150}
-                  step={1}
+                  min={DEFAULTS.FONT_SIZE_MIN}
+                  max={DEFAULTS.FONT_SIZE_MAX}
+                  step={DEFAULTS.FONT_SIZE_STEP}
                   className="w-full"
                 />
               </div>

@@ -1,18 +1,24 @@
 /**
- * Embedded blueprints for the ASS Table Generator
+ * Blueprint definitions for the ASS Table Generator
  * Each blueprint contains styling templates - user provides the text content
  */
 
+import { BlueprintId, ResolutionPresetId, STORAGE_KEYS, RESOLUTION_VALUES } from "./constants";
+
+// ============================================================================
+// TYPES
+// ============================================================================
+
 export interface Blueprint {
-  id: string;
+  id: BlueprintId | string;
   name: string;
-  // Style prefix for title (applied before user text)
+  /** Style prefix for title (applied before user text) */
   titleStyle: string;
-  // Style prefix for content
+  /** Style prefix for content */
   contentStyle: string;
-  // Style prefix for description
+  /** Style prefix for description */
   descriptionStyle: string;
-  // Default values for new users
+  /** Default values for new users */
   defaults: {
     title: string;
     content: string;
@@ -20,9 +26,28 @@ export interface Blueprint {
   };
 }
 
+export interface ResolutionPreset {
+  id: ResolutionPresetId | string;
+  name: string;
+  width: number;
+  height: number;
+}
+
+export interface SavedBlueprintContent {
+  [blueprintId: string]: {
+    title: string;
+    content: string;
+    description: string;
+  };
+}
+
+// ============================================================================
+// BLUEPRINT DATA
+// ============================================================================
+
 export const BLUEPRINTS: Blueprint[] = [
   {
-    id: "animegate",
+    id: BlueprintId.AnimeGate,
     name: "AnimeGATE",
     titleStyle: String.raw`{\4c&H75605D&\3c&H57423F&\1c&HFFBE74&\3a&H00&\fnTahoma\b1\fs89}`,
     contentStyle: String.raw`{\4c&H75605D&\3c&H57423F&\1c&HFFBE74&\3a&H00&\fnTahoma\b1\fs108}`,
@@ -34,7 +59,7 @@ export const BLUEPRINTS: Blueprint[] = [
     },
   },
   {
-    id: "animesubs-info",
+    id: BlueprintId.AnimeSubsInfo,
     name: "AnimeSubs.info",
     titleStyle: String.raw`{\4c&H75605D&\3c&H310E61&\1c&HFFBE74&\3a&H00&\fnTahoma\b1\fs76}`,
     contentStyle: String.raw`{\fnTahoma\b1\fs58}`,
@@ -46,7 +71,7 @@ export const BLUEPRINTS: Blueprint[] = [
     },
   },
   {
-    id: "biblioteka-nyaa",
+    id: BlueprintId.BibliotekaNyaa,
     name: "Biblioteka Nyaa",
     titleStyle: String.raw`{\2c&H275886&\4c&H0C0B0B&\3c&H4AA0B3&\1c&H275BDE&\3a&H00&\fnTahoma\b1\fs66}`,
     contentStyle: String.raw`{\2c&H2D5ACE&\4c&H25C596&\3c&H000000&\1c&H0000FF&\3a&H00&\fnTahoma\b1\fs58}`,
@@ -58,7 +83,7 @@ export const BLUEPRINTS: Blueprint[] = [
     },
   },
   {
-    id: "demo-subs",
+    id: BlueprintId.DemoSubs,
     name: "Demo Subs",
     titleStyle: String.raw`{\4c&H75605D&\3c&H0D0D5A&\1c&H4B4CE6&\3a&H00&\fnTahoma\b1\fs89}`,
     contentStyle: String.raw`{\4c&H75605D&\3c&H0D0D5A&\1c&H4B4CE6&\3a&H00&\fnTahoma\b1\fs58}`,
@@ -70,7 +95,7 @@ export const BLUEPRINTS: Blueprint[] = [
     },
   },
   {
-    id: "desu-online",
+    id: BlueprintId.DesuOnline,
     name: "Desu-Online",
     titleStyle: String.raw`{\bord5\4c&H75605D&\3c&HB27733&\1c&HEDEDED&\3a&H00&\fnTahoma\b1\fs89}`,
     contentStyle: String.raw`{\bord5\4c&H75605D&\3c&HB27733&\1c&HEDEDED&\3a&H00&\fnTahoma\b1\fs58}`,
@@ -82,7 +107,7 @@ export const BLUEPRINTS: Blueprint[] = [
     },
   },
   {
-    id: "frixysubs",
+    id: BlueprintId.FrixySubs,
     name: "FrixySubs",
     titleStyle: String.raw`{\4c&H75605D&\3c&H052D39&\1c&H1DADFF&\3a&H00&\fnTahoma\b1\fs89}`,
     contentStyle: String.raw`{\4c&H75605D&\3c&H052D39&\1c&H1DADFF&\3a&H00&\fnTahoma\b1\fs58}`,
@@ -94,7 +119,7 @@ export const BLUEPRINTS: Blueprint[] = [
     },
   },
   {
-    id: "lycoriscafe",
+    id: BlueprintId.LycorisCafe,
     name: "LycorisCafe",
     titleStyle: String.raw`{\4c&H75605D&\3c&H310E61&\1c&H7646FF&\3a&H00&\fnTahoma\b1\fs89}`,
     contentStyle: String.raw`{\4c&H75605D&\3c&H310E61&\1c&H7646FF&\3a&H00&\fnTahoma\b1\fs58}`,
@@ -106,7 +131,7 @@ export const BLUEPRINTS: Blueprint[] = [
     },
   },
   {
-    id: "shisha",
+    id: BlueprintId.Shisha,
     name: "Shisha",
     titleStyle: String.raw`{\4c&H75605D&\3c&H60660C&\1c&HFFFC8A&\3a&H00&\fnTahoma\b1\fs89}`,
     contentStyle: String.raw`{\4c&H75605D&\3c&H60660C&\1c&HFFFC8A&\3a&H00&\fnTahoma\b1\fs58}`,
@@ -118,7 +143,7 @@ export const BLUEPRINTS: Blueprint[] = [
     },
   },
   {
-    id: "custom",
+    id: BlueprintId.Custom,
     name: "Własny",
     titleStyle: String.raw`{\4c&H75605D&\3c&H57423F&\1c&HFFBE74&\3a&H00&\fnTahoma\b1\fs89}`,
     contentStyle: String.raw`{\4c&H75605D&\3c&H57423F&\1c&HFFBE74&\3a&H00&\fnTahoma\b1\fs108}`,
@@ -131,23 +156,41 @@ export const BLUEPRINTS: Blueprint[] = [
   },
 ];
 
-/**
- * Resolution presets for common video formats
- */
-export interface ResolutionPreset {
-  id: string;
-  name: string;
-  width: number;
-  height: number;
-}
+// ============================================================================
+// RESOLUTION PRESETS
+// ============================================================================
 
 export const RESOLUTION_PRESETS: ResolutionPreset[] = [
-  { id: "1080p", name: "1920x1080 (Full HD)", width: 1920, height: 1080 },
-  { id: "1080p-cinema", name: "1920x820 (Kinowe 1080p)", width: 1920, height: 820 },
-  { id: "4k", name: "3840x2160 (4K)", width: 3840, height: 2160 },
-  { id: "4k-cinema", name: "3840x1640 (Kinowe 4K)", width: 3840, height: 1640 },
-  { id: "custom", name: "Własne", width: 1920, height: 1080 },
+  {
+    id: ResolutionPresetId.FullHD,
+    name: "1920x1080 (Full HD)",
+    ...RESOLUTION_VALUES[ResolutionPresetId.FullHD],
+  },
+  {
+    id: ResolutionPresetId.FullHDCinema,
+    name: "1920x820 (Kinowe 1080p)",
+    ...RESOLUTION_VALUES[ResolutionPresetId.FullHDCinema],
+  },
+  {
+    id: ResolutionPresetId.UHD4K,
+    name: "3840x2160 (4K)",
+    ...RESOLUTION_VALUES[ResolutionPresetId.UHD4K],
+  },
+  {
+    id: ResolutionPresetId.UHD4KCinema,
+    name: "3840x1640 (Kinowe 4K)",
+    ...RESOLUTION_VALUES[ResolutionPresetId.UHD4KCinema],
+  },
+  {
+    id: ResolutionPresetId.Custom,
+    name: "Własne",
+    ...RESOLUTION_VALUES[ResolutionPresetId.Custom],
+  },
 ];
+
+// ============================================================================
+// HELPER FUNCTIONS
+// ============================================================================
 
 /**
  * Get a blueprint by ID
@@ -159,31 +202,20 @@ export function getBlueprintById(id: string): Blueprint | undefined {
 /**
  * Get a resolution preset by ID
  */
-export function getResolutionPresetById(
-  id: string
-): ResolutionPreset | undefined {
+export function getResolutionPresetById(id: string): ResolutionPreset | undefined {
   return RESOLUTION_PRESETS.find((preset) => preset.id === id);
 }
 
-/**
- * LocalStorage key for saving blueprint content
- */
-const STORAGE_KEY = "tabelka-blueprint-content";
-
-export interface SavedBlueprintContent {
-  [blueprintId: string]: {
-    title: string;
-    content: string;
-    description: string;
-  };
-}
+// ============================================================================
+// LOCALSTORAGE PERSISTENCE
+// ============================================================================
 
 /**
  * Load saved content for all blueprints from localStorage
  */
 export function loadSavedContent(): SavedBlueprintContent {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = localStorage.getItem(STORAGE_KEYS.BLUEPRINT_CONTENT);
     if (saved) {
       return JSON.parse(saved);
     }
@@ -203,7 +235,7 @@ export function saveContentForBlueprint(
   try {
     const saved = loadSavedContent();
     saved[blueprintId] = content;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+    localStorage.setItem(STORAGE_KEYS.BLUEPRINT_CONTENT, JSON.stringify(saved));
   } catch (e) {
     console.error("Failed to save blueprint content:", e);
   }
@@ -227,6 +259,7 @@ export function getContentForBlueprint(blueprintId: string): {
     return blueprint.defaults;
   }
 
+  // Fallback for unknown blueprints
   return {
     title: "Nazwa Grupy",
     content: "Zawartość",
