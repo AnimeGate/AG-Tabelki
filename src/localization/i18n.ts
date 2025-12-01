@@ -21,11 +21,6 @@ i18n.use(initReactI18next).init({
         themeSystem: "Systemowy",
         versionSection: "Wersja",
         currentVersion: "Aktualna wersja",
-        // Network Status
-        offlineTitle: "Jesteś offline",
-        offlineDescription: "Sprawdź połączenie internetowe",
-        onlineTitle: "Ponownie online",
-        onlineDescription: "Połączenie internetowe przywrócone",
         // Update Dialog
         updateAvailableTitle: "Dostępna aktualizacja",
         updateReadyTitle: "Aktualizacja gotowa",
@@ -94,11 +89,6 @@ i18n.use(initReactI18next).init({
         themeSystem: "System",
         versionSection: "Version",
         currentVersion: "Current version",
-        // Network Status
-        offlineTitle: "You are offline",
-        offlineDescription: "Check your internet connection",
-        onlineTitle: "Back online",
-        onlineDescription: "Internet connection restored",
         // Update Dialog
         updateAvailableTitle: "Update Available",
         updateReadyTitle: "Update Ready",

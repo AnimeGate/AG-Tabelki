@@ -7,6 +7,17 @@ projekt stosuje [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [1.0.1] - 2025-12-01
+
+### Poprawiono
+- **Ikona aplikacji** - Naprawiono wyświetlanie własnej ikony zamiast domyślnej ikony Electron
+- **Tytuł aplikacji** - Poprawiono tytuł aplikacji z "Electron Starter Template" na "AG-Tabelki"
+
+### Usunięto
+- **Wskaźnik offline** - Usunięto nieużywany komponent OfflineIndicator i powiązany hook useOnlineStatus
+
+---
+
 ## [1.0.0] - 2025-12-01
 
 ### Dodano
