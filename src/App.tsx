@@ -7,7 +7,6 @@ import { RouterProvider } from "@tanstack/react-router";
 import { router } from "./utils/routes";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { Toaster } from "@/components/ui/sonner";
-import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { UpdateDialog } from "@/components/UpdateDialog";
 import "./localization/i18n";
 
@@ -23,7 +22,6 @@ export default function App() {
     <>
       <RouterProvider router={router} />
       <Toaster />
-      <OfflineIndicator />
       <UpdateDialog />
     </>
   );
