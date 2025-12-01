@@ -9,7 +9,6 @@ i18n.use(initReactI18next).init({
       translation: {
         appName: APP_NAME,
         // Navbar
-        navHome: "Strona główna",
         settings: "Ustawienia",
         // Settings Modal
         settingsTitle: "Ustawienia aplikacji",
@@ -83,7 +82,6 @@ i18n.use(initReactI18next).init({
       translation: {
         appName: APP_NAME,
         // Navbar
-        navHome: "Home",
         settings: "Settings",
         // Settings Modal
         settingsTitle: "Application Settings",
