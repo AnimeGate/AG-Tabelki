@@ -21,7 +21,7 @@ interface ElectronWindow {
 
 interface DebugAPI {
   log: (
-    level: "info" | "success" | "warn" | "error" | "debug" | "route" | "ipc" | "updater",
+    level: "info" | "success" | "warn" | "error" | "debug" | "route" | "ipc" | "updater" | "perf" | "network" | "state" | "lifecycle" | "legal",
     message: string,
     ...args: unknown[]
   ) => void;
@@ -33,6 +33,11 @@ interface DebugAPI {
   route: (message: string, ...args: unknown[]) => void;
   ipc: (message: string, ...args: unknown[]) => void;
   updater: (message: string, ...args: unknown[]) => void;
+  perf: (message: string, ...args: unknown[]) => void;
+  network: (message: string, ...args: unknown[]) => void;
+  state: (message: string, ...args: unknown[]) => void;
+  lifecycle: (message: string, ...args: unknown[]) => void;
+  legal: (message: string, ...args: unknown[]) => void;
 }
 
 interface UpdaterAPI {

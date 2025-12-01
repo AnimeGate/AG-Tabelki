@@ -199,4 +199,32 @@ export const debugLog = {
       sendToDebugConsole("legal", message, args);
     }
   },
+
+  perf: (message: string, ...args: unknown[]) => {
+    if (isDebugMode) {
+      log.debug(`⏱️  [PERF] ${message}`, ...args);
+      sendToDebugConsole("perf", message, args);
+    }
+  },
+
+  network: (message: string, ...args: unknown[]) => {
+    if (isDebugMode) {
+      log.debug(`🌐 [NETWORK] ${message}`, ...args);
+      sendToDebugConsole("network", message, args);
+    }
+  },
+
+  state: (message: string, ...args: unknown[]) => {
+    if (isDebugMode) {
+      log.debug(`📦 [STATE] ${message}`, ...args);
+      sendToDebugConsole("state", message, args);
+    }
+  },
+
+  lifecycle: (message: string, ...args: unknown[]) => {
+    if (isDebugMode) {
+      log.debug(`🔄 [LIFECYCLE] ${message}`, ...args);
+      sendToDebugConsole("lifecycle", message, args);
+    }
+  },
 };

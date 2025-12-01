@@ -8,7 +8,13 @@ import { router } from "./utils/routes";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { Toaster } from "@/components/ui/sonner";
 import { UpdateDialog } from "@/components/UpdateDialog";
+import { installNetworkInterceptor } from "./helpers/network-interceptor";
 import "./localization/i18n";
+
+// Install network interceptor for debug console
+if (window.debugAPI) {
+  installNetworkInterceptor();
+}
 
 export default function App() {
   const { i18n } = useTranslation();

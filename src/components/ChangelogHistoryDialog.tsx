@@ -16,8 +16,27 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronRight, History, Loader2, AlertCircle } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  History,
+  Loader2,
+  AlertCircle,
+  RefreshCw,
+} from "lucide-react";
 import { APP_CONFIG } from "@/config/app.config";
+import {
+  fetchReleasesWithCache,
+  getCacheInfo,
+  clearReleasesCache,
+  formatCacheTime,
+} from "@/helpers/github-cache";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface GitHubRelease {
   id: number;
@@ -34,12 +53,17 @@ export function ChangelogHistoryDialog() {
   const [releases, setReleases] = useState<GitHubRelease[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [expandedReleases, setExpandedReleases] = useState<Set<number>>(new Set());
+  const [expandedReleases, setExpandedReleases] = useState<Set<number>>(
+    new Set(),
+  );
+  const [fromCache, setFromCache] = useState(false);
+  const [cacheRemainingMs, setCacheRemainingMs] = useState(0);
 
   // Build GitHub API URL from config
-  const githubApiUrl = APP_CONFIG.github?.owner && APP_CONFIG.github?.repo
-    ? `https://api.github.com/repos/${APP_CONFIG.github.owner}/${APP_CONFIG.github.repo}/releases`
-    : null;
+  const githubApiUrl =
+    APP_CONFIG.github?.owner && APP_CONFIG.github?.repo
+      ? `https://api.github.com/repos/${APP_CONFIG.github.owner}/${APP_CONFIG.github.repo}/releases`
+      : null;
 
   useEffect(() => {
     if (open && releases.length === 0 && !loading && githubApiUrl) {
@@ -47,7 +71,24 @@ export function ChangelogHistoryDialog() {
     }
   }, [open]);
 
-  const fetchReleases = async () => {
+  // Update cache remaining time periodically when dialog is open
+  useEffect(() => {
+    if (!open || !fromCache) return;
+
+    const interval = setInterval(() => {
+      const info = getCacheInfo();
+      if (info.remainingMs > 0) {
+        setCacheRemainingMs(info.remainingMs);
+      } else {
+        setFromCache(false);
+        setCacheRemainingMs(0);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [open, fromCache]);
+
+  const fetchReleases = async (forceRefresh = false) => {
     if (!githubApiUrl) {
       setError(t("changelogNoConfig"));
       return;
@@ -55,29 +96,33 @@ export function ChangelogHistoryDialog() {
 
     setLoading(true);
     setError(null);
+
     try {
-      const response = await fetch(githubApiUrl, {
-        headers: {
-          Accept: "application/vnd.github.v3+json",
-        },
+      const result = await fetchReleasesWithCache(githubApiUrl, {
+        forceRefresh,
+        ttlMs: 15 * 60 * 1000, // 15 minutes
       });
 
-      if (!response.ok) {
-        throw new Error(`GitHub API error: ${response.status}`);
-      }
+      setReleases(result.releases);
+      setFromCache(result.fromCache);
 
-      const data: GitHubRelease[] = await response.json();
-      setReleases(data);
+      const info = getCacheInfo();
+      setCacheRemainingMs(info.remainingMs);
 
       // Auto-expand the first (latest) release
-      if (data.length > 0) {
-        setExpandedReleases(new Set([data[0].id]));
+      if (result.releases.length > 0) {
+        setExpandedReleases(new Set([result.releases[0].id]));
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to fetch releases");
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleRefresh = () => {
+    clearReleasesCache();
+    fetchReleases(true);
   };
 
   const toggleRelease = (id: number) => {
@@ -110,21 +155,50 @@ export function ChangelogHistoryDialog() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <History className="h-5 w-5" />
-            {t("changelogHistoryTitle")}
-          </DialogTitle>
+          <div className="flex items-center justify-between">
+            <DialogTitle className="flex items-center gap-2">
+              <History className="h-5 w-5" />
+              {t("changelogHistoryTitle")}
+            </DialogTitle>
+            <div className="mr-6 flex items-center gap-2">
+              {fromCache && cacheRemainingMs > 0 && (
+                <span className="text-muted-foreground text-xs">
+                  {t("changelogCached", {
+                    time: formatCacheTime(cacheRemainingMs),
+                  })}
+                </span>
+              )}
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8"
+                      onClick={handleRefresh}
+                      disabled={loading}
+                    >
+                      <RefreshCw
+                        className={`h-4 w-4 ${loading ? "animate-spin" : ""}`}
+                      />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom">
+                    <p>{t("changelogRefresh")}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+          </div>
           <DialogDescription>{t("changelogHistoryDesc")}</DialogDescription>
         </DialogHeader>
 
         <ScrollArea className="h-[60vh] pr-4">
           {!githubApiUrl && (
-            <div className="flex flex-col items-center justify-center gap-2 py-8 text-muted-foreground">
+            <div className="text-muted-foreground flex flex-col items-center justify-center gap-2 py-8">
               <AlertCircle className="h-6 w-6" />
-              <p className="text-sm text-center">
-                {t("changelogNoConfig")}
-              </p>
-              <p className="text-xs text-center">
+              <p className="text-center text-sm">{t("changelogNoConfig")}</p>
+              <p className="text-center text-xs">
                 Configure APP_CONFIG.github in src/config/app.config.ts
               </p>
             </div>
@@ -132,22 +206,26 @@ export function ChangelogHistoryDialog() {
 
           {githubApiUrl && loading && (
             <div className="flex items-center justify-center py-8">
-              <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+              <Loader2 className="text-muted-foreground h-6 w-6 animate-spin" />
             </div>
           )}
 
           {githubApiUrl && error && (
-            <div className="flex flex-col items-center justify-center gap-2 py-8 text-destructive">
+            <div className="text-destructive flex flex-col items-center justify-center gap-2 py-8">
               <AlertCircle className="h-6 w-6" />
               <p className="text-sm">{error}</p>
-              <Button variant="outline" size="sm" onClick={fetchReleases}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => fetchReleases()}
+              >
                 {t("changelogRetry")}
               </Button>
             </div>
           )}
 
           {githubApiUrl && !loading && !error && releases.length === 0 && (
-            <div className="flex items-center justify-center py-8 text-muted-foreground">
+            <div className="text-muted-foreground flex items-center justify-center py-8">
               <p className="text-sm">{t("changelogNoReleases")}</p>
             </div>
           )}
@@ -164,12 +242,12 @@ export function ChangelogHistoryDialog() {
                     className={`rounded-lg border ${index === 0 ? "border-primary/50 bg-primary/5" : "bg-muted/30"}`}
                   >
                     <CollapsibleTrigger asChild>
-                      <button className="flex w-full items-center justify-between rounded-lg p-3 text-left transition-colors hover:bg-muted/50">
+                      <button className="hover:bg-muted/50 flex w-full items-center justify-between rounded-lg p-3 text-left transition-colors">
                         <div className="flex items-center gap-3">
                           {expandedReleases.has(release.id) ? (
-                            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                            <ChevronDown className="text-muted-foreground h-4 w-4" />
                           ) : (
-                            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                            <ChevronRight className="text-muted-foreground h-4 w-4" />
                           )}
                           <div>
                             <div className="flex items-center gap-2">
@@ -177,12 +255,12 @@ export function ChangelogHistoryDialog() {
                                 {release.name || release.tag_name}
                               </span>
                               {index === 0 && (
-                                <span className="rounded bg-primary px-1.5 py-0.5 text-xs text-primary-foreground">
+                                <span className="bg-primary text-primary-foreground rounded px-1.5 py-0.5 text-xs">
                                   {t("changelogLatest")}
                                 </span>
                               )}
                             </div>
-                            <span className="text-xs text-muted-foreground">
+                            <span className="text-muted-foreground text-xs">
                               {formatDate(release.published_at)}
                             </span>
                           </div>
@@ -191,11 +269,11 @@ export function ChangelogHistoryDialog() {
                     </CollapsibleTrigger>
                     <CollapsibleContent>
                       <div className="border-t px-4 py-3">
-                        <div className="prose prose-sm max-w-none dark:prose-invert prose-headings:my-2 prose-headings:font-semibold prose-h1:text-lg prose-h2:text-base prose-h3:text-sm prose-p:my-1 prose-ul:my-1 prose-li:my-0.5 prose-code:rounded prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:text-xs prose-strong:text-foreground">
+                        <div className="prose prose-sm dark:prose-invert prose-headings:my-2 prose-headings:font-semibold prose-h1:text-lg prose-h2:text-base prose-h3:text-sm prose-p:my-1 prose-ul:my-1 prose-li:my-0.5 prose-code:rounded prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:text-xs prose-strong:text-foreground max-w-none">
                           {release.body ? (
                             <ReactMarkdown>{release.body}</ReactMarkdown>
                           ) : (
-                            <p className="italic text-muted-foreground">
+                            <p className="text-muted-foreground italic">
                               {t("changelogNoNotes")}
                             </p>
                           )}

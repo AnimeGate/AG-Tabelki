@@ -45,6 +45,8 @@ i18n.use(initReactI18next).init({
         changelogNoNotes: "Brak notatek dla tego wydania",
         changelogRetry: "Spróbuj ponownie",
         changelogNoConfig: "Brak konfiguracji GitHub",
+        changelogCached: "Z cache ({{time}})",
+        changelogRefresh: "Odśwież",
         // Common
         lines: "linii",
         // Tabelka (ASS Table Generator)
@@ -117,6 +119,8 @@ i18n.use(initReactI18next).init({
         changelogNoNotes: "No release notes available",
         changelogRetry: "Retry",
         changelogNoConfig: "GitHub configuration missing",
+        changelogCached: "Cached ({{time}})",
+        changelogRefresh: "Refresh",
         // Common
         lines: "lines",
         // Tabelka (ASS Table Generator)
