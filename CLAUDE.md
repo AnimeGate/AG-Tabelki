@@ -22,8 +22,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Development
 - `pnpm start` - Start the app in development mode with Vite hot reload
-- `pnpm run start:debug` - Start with debug mode (opens debug console window)
-- `pnpm run start:debug:win` - Windows-specific debug mode command
+- `pnpm run dev` - Start with debug mode (opens debug console window)
+- `pnpm run dev:win` - Windows-specific debug mode command
 - `pnpm run lint` - Run ESLint
 - `pnpm run format` - Check formatting with Prettier
 - `pnpm run format:write` - Format all code
@@ -171,7 +171,7 @@ electron-updater + NSIS with custom React UI:
 
 ### Debug Mode
 
-Enable with `pnpm run start:debug` or `--debug` flag in production.
+Enable with `pnpm run dev` or `--debug` flag in production.
 
 Features:
 - Separate debug console window

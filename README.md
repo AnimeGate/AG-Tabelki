@@ -51,7 +51,7 @@ pnpm start
 pnpm start
 
 # Start with debug console
-pnpm run start:debug
+pnpm run dev
 
 # Run tests
 pnpm test
@@ -135,7 +135,7 @@ AG-Tabelki/
 | Script | Description |
 |--------|-------------|
 | `pnpm start` | Start development server |
-| `pnpm run start:debug` | Start with debug console |
+| `pnpm run dev` | Start with debug console |
 | `pnpm run build` | Build for production |
 | `pnpm run dist:dir` | Build and package (no installer) |
 | `pnpm run dist` | Build with installer |

@@ -54,7 +54,7 @@ export const BLUEPRINTS: Blueprint[] = [
     descriptionStyle: String.raw`{\4c&H75605D&\3c&H57423F&\1c&HFFBE74&\3a&H00&\fnTahoma\b1\fs48}`,
     defaults: {
       title: "AnimeGATE",
-      content: "Lektor: <MR_204>",
+      content: "Lektor: osoba",
       description: "Discord: discord.gg/AnimeGate",
     },
   },
@@ -66,7 +66,7 @@ export const BLUEPRINTS: Blueprint[] = [
     descriptionStyle: String.raw`{\fnTahoma\b1\fs48}`,
     defaults: {
       title: "AnimeSubs.info",
-      content: "Tłumacz: <...> \\N\\N Korekta: <...>\\N\\N TypeSettings: <...>",
+      content: "Tłumacz: osoba",
       description: "Strona: AnimeSubs.info",
     },
   },
@@ -78,7 +78,7 @@ export const BLUEPRINTS: Blueprint[] = [
     descriptionStyle: String.raw`{\4c&H4D5053&\3c&H000000&\1c&H0559F1&\3a&H00&\fnTahoma\b1\fs48}`,
     defaults: {
       title: "Biblioteka Nyaa",
-      content: "Tłumacz: <...> \\N\\N Korekta: <...>\\N\\N TypeSettings: <...>",
+      content: "Tłumacz: osoba",
       description: "Strona: https://nyaa.si/",
     },
   },
@@ -90,7 +90,7 @@ export const BLUEPRINTS: Blueprint[] = [
     descriptionStyle: String.raw`{\4c&H75605D&\3c&H0D0D5A&\1c&H4B4CE6&\3a&H00&\fnTahoma\b1\fs48}`,
     defaults: {
       title: "Demo Subs",
-      content: "Tłumacz: <...> \\N\\N Korekta: <...>\\N\\N TypeSettings: <...>",
+      content: "Tłumacz: osoba",
       description: "Discord: discord.gg/demosubs",
     },
   },
@@ -102,7 +102,7 @@ export const BLUEPRINTS: Blueprint[] = [
     descriptionStyle: String.raw`{\bord5\4c&H75605D&\3c&HB27733&\1c&HEDEDED&\3a&H00&\fnTahoma\b1\fs48}`,
     defaults: {
       title: "Desu-Online",
-      content: "Tłumacz: <...> \\N\\N Korekta: <...>\\N\\N TypeSettings: <...>",
+      content: "Tłumacz: osoba",
       description: "Discord: discord.gg/fuFwbwjDNV",
     },
   },
@@ -114,7 +114,7 @@ export const BLUEPRINTS: Blueprint[] = [
     descriptionStyle: String.raw`{\4c&H75605D&\3c&H052D39&\1c&H1DADFF&\3a&H00&\fnTahoma\b1\fs48}`,
     defaults: {
       title: "FrixySubs",
-      content: "Tłumacz: <...> \\N\\N Korekta: <...>\\N\\N TypeSettings: <...>",
+      content: "Tłumacz: osoba",
       description: "Discord: discord.gg/frixysubs",
     },
   },
@@ -126,7 +126,7 @@ export const BLUEPRINTS: Blueprint[] = [
     descriptionStyle: String.raw`{\4c&H75605D&\3c&H310E61&\1c&H7646FF&\3a&H00&\fnTahoma\b1\fs48}`,
     defaults: {
       title: "LycorisCafe",
-      content: "Tłumacz: <...> \\N\\N Korekta: <...>\\N\\N TypeSettings: <...>",
+      content: "Tłumacz: osoba",
       description: "Discord: discord.gg/54ea46RHxb",
     },
   },
@@ -138,7 +138,7 @@ export const BLUEPRINTS: Blueprint[] = [
     descriptionStyle: String.raw`{\4c&H75605D&\3c&H60660C&\1c&HFFFC8A&\3a&H00&\fnTahoma\b1\fs48}`,
     defaults: {
       title: "Shisha",
-      content: "Tłumacz: <...> \\N\\N Korekta: <...>\\N\\N TypeSettings: <...>",
+      content: "Tłumacz: osoba",
       description: "Discord: discord.gg/szisza",
     },
   },
@@ -150,7 +150,7 @@ export const BLUEPRINTS: Blueprint[] = [
     descriptionStyle: String.raw`{\4c&H75605D&\3c&H57423F&\1c&HFFBE74&\3a&H00&\fnTahoma\b1\fs48}`,
     defaults: {
       title: "Nazwa Grupy",
-      content: "Tłumacz: <...> \\N\\N Korekta: <...>\\N\\N TypeSettings: <...>",
+      content: "Tłumacz: osoba",
       description: "Discord: discord.gg/...",
     },
   },
