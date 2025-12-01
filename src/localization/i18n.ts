@@ -21,6 +21,10 @@ i18n.use(initReactI18next).init({
         themeSystem: "Systemowy",
         versionSection: "Wersja",
         currentVersion: "Aktualna wersja",
+        // Legal
+        legalSection: "Prawa autorskie",
+        allRightsReserved: "Wszelkie prawa zastrzeżone",
+        copyrightHolder: "Shironex / AnimeGATE",
         // Update Dialog
         updateAvailableTitle: "Dostępna aktualizacja",
         updateReadyTitle: "Aktualizacja gotowa",
@@ -89,6 +93,10 @@ i18n.use(initReactI18next).init({
         themeSystem: "System",
         versionSection: "Version",
         currentVersion: "Current version",
+        // Legal
+        legalSection: "Copyright",
+        allRightsReserved: "All rights reserved",
+        copyrightHolder: "Shironex / AnimeGATE",
         // Update Dialog
         updateAvailableTitle: "Update Available",
         updateReadyTitle: "Update Ready",

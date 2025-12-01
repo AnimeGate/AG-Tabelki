@@ -7,6 +7,20 @@ projekt stosuje [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [1.0.2] - 2025-12-01
+
+### Dodano
+- **Informacje prawne w ustawieniach** - Sekcja praw autorskich w oknie ustawień aplikacji
+- **Nowy poziom logowania "legal"** - Dedykowany poziom logowania dla informacji prawnych w konsoli debugowania (różowy kolor)
+- **Log praw autorskich** - Automatyczne wyświetlanie informacji o prawach autorskich w konsoli debugowania
+
+### Zmieniono
+- **Licencja** - Zaktualizowano licencję na "All Rights Reserved" z pełnymi warunkami prawnymi
+- **README** - Dodano informacje o prawach autorskich i właścicielu kodu (Shironex / AnimeGATE)
+- **package.json** - Zmieniono licencję na "UNLICENSED" i autora na "Shironex"
+
+---
+
 ## [1.0.1] - 2025-12-01
 
 ### Poprawiono

@@ -1,7 +1,7 @@
 {
   "name": "ag-tabelki",
   "productName": "AG-Tabelki",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "ASS subtitle table overlay generator for fansub groups",
   "main": "dist-electron/main.js",
   "private": true,
@@ -23,8 +23,8 @@
     "test:e2e": "playwright test",
     "test:all": "vitest run && playwright test"
   },
-  "author": "Your Name <your.email@example.com>",
-  "license": "MIT",
+  "author": "Shironex",
+  "license": "UNLICENSED",
   "repository": {
     "type": "git",
     "url": "https://github.com/AnimeGate/AG-Tabelki.git"

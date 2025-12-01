@@ -2,6 +2,20 @@
 
 ASS subtitle table overlay generator for fansub groups. Create professional-looking table overlays for anime fansubs with ease.
 
+## License
+
+**ALL RIGHTS RESERVED** - No license is granted.
+
+This repository is temporarily public solely for technical requirements (GitHub Releases API for auto-update functionality). Public visibility does NOT constitute a grant of any license or permission to use this code.
+
+See [LICENSE](./LICENSE) for full terms.
+
+## Copyright
+
+Copyright (c) 2025 [Shironex](https://github.com/Shironex) / AnimeGATE
+
+Built by [Shironex](https://github.com/Shironex) for [AnimeGate](https://github.com/AnimeGate)
+
 ## Features
 
 - **Multiple Preset Blueprints** - AnimeGATE, AnimeSubs.info, Biblioteka Nyaa, Desu-Online, FrixySubs, LycorisCafe, Shisha, and more
@@ -143,14 +157,6 @@ AG-Tabelki/
 | `pnpm test` | Run unit tests |
 | `pnpm run lint` | Lint code |
 | `pnpm run format:write` | Format code |
-
-## License
-
-MIT License - see [LICENSE](./LICENSE) file for details.
-
-## Credits
-
-Built by [AnimeGate](https://github.com/AnimeGate)
 
 Technologies used:
 - [Electron](https://electronjs.org)
