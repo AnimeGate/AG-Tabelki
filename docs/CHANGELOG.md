@@ -1,127 +1,66 @@
-# Changelog
+# Historia zmian
 
-All notable changes to this project will be documented in this file.
+Wszystkie istotne zmiany w projekcie będą dokumentowane w tym pliku.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
----
-
-## Example Release Notes Format
-
-When creating GitHub releases, use the following format for release notes. These will be displayed in the update dialog when users receive an update notification.
+Format oparty na [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+projekt stosuje [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
-## [1.2.0] - 2025-01-15
+## [1.0.0] - 2025-12-01
 
-### Added
-- New dark mode toggle with system preference detection
-- Keyboard shortcuts for common actions (`Ctrl+S` to save, `Ctrl+O` to open)
-- Export functionality with multiple format support (JSON, CSV, PDF)
-- Drag and drop file import
-
-### Changed
-- Improved performance of large file handling by 40%
-- Updated UI components with better accessibility support
-- Migrated to React 19 with automatic optimizations
-
-### Fixed
-- Fixed memory leak when switching between tabs rapidly
-- Resolved issue where settings weren't persisting after restart
-- Fixed crash on startup when offline
-
-### Security
-- Updated electron to latest version with security patches
-- Added Content Security Policy headers
+### Dodano
+- **Generator tabelek ASS** - Tworzenie profesjonalnych nakładek tabelkowych dla fansubów
+- **9 gotowych szablonów** - AnimeGATE, AnimeSubs.info, Biblioteka Nyaa, Demo Subs, Desu-Online, FrixySubs, LycorisCafe, Shisha oraz szablon własny
+- **Presety rozdzielczości** - 1080p, 1080p Cinema (2.35:1), 4K, 4K Cinema, własna rozdzielczość
+- **Podgląd na żywo** - Podgląd SVG z możliwością dodania tła
+- **Generator logo** - Tworzenie nakładek logo w rogu ekranu
+- **Pozycjonowanie** - Wybór pozycji tabelki (lewa/prawa strona)
+- **Edytowalny rozmiar czcionki** - Suwak do regulacji rozmiaru czcionki zawartości
+- **Zapisywanie szablonów** - Automatyczny zapis zmian w localStorage
+- **Kopiowanie do schowka** - Szybkie kopiowanie wygenerowanego kodu ASS
+- **Wsparcie dla wielu języków** - Polski i angielski interfejs
+- **Motywy** - Jasny, ciemny i systemowy motyw
+- **Automatyczne aktualizacje** - System aktualizacji przez GitHub Releases
+- **Tryb debugowania** - Osobne okno konsoli z kolorowymi logami
 
 ---
 
-## [1.1.0] - 2025-01-01
+## Szablon notatek wydania
 
-### Added
-- Multi-language support (English, Polish)
-- Auto-save feature with configurable interval
-- Recent files list in the File menu
+Podczas tworzenia wydań na GitHub, użyj poniższego formatu dla notatek. Będą one wyświetlane w oknie dialogowym aktualizacji.
 
-### Changed
-- Redesigned settings modal with tabbed interface
-- Improved error messages with actionable suggestions
-
-### Fixed
-- Fixed window position not restoring correctly on multi-monitor setups
-- Resolved file encoding issues with UTF-8 characters
-
----
-
-## [1.0.0] - 2024-12-15
-
-### Added
-- Initial release
-- Core editor functionality
-- Theme support (light/dark/system)
-- Auto-update system
-- Debug mode with separate console window
-
----
-
-## Writing Good Release Notes
-
-### Tips for the Update Dialog
-
-The update dialog renders Markdown, so you can use:
-
-1. **Headers** - Use `##` for version, `###` for categories
-2. **Lists** - Bullet points for individual changes
-3. **Code** - Inline `code` for shortcuts, commands, file names
-4. **Bold** - **Highlight** important changes
-5. **Links** - [Link to docs](https://example.com) if needed
-
-### Recommended Categories
-
-- **Added** - New features
-- **Changed** - Changes in existing functionality
-- **Deprecated** - Soon-to-be removed features
-- **Removed** - Removed features
-- **Fixed** - Bug fixes
-- **Security** - Vulnerability fixes
-
-### Example Single Release (Copy-Paste Template)
+### Przykład (do skopiowania)
 
 ```markdown
-## What's New in v1.2.0
+## Co nowego w v1.1.0
 
-### New Features
-- **Dark Mode** - Automatic theme switching based on system preferences
-- **Keyboard Shortcuts** - Press `Ctrl+K` to open command palette
-- **Export Options** - Export your work as PDF, JSON, or CSV
+### Nowe funkcje
+- **Nowa funkcja** - Opis nowej funkcjonalności
+- **Skróty klawiszowe** - Naciśnij `Ctrl+K` aby otworzyć paletę komend
 
-### Improvements
-- Faster startup time (reduced by 50%)
-- Better memory management for large files
-- Updated translations for Polish locale
+### Ulepszenia
+- Szybszy czas uruchamiania
+- Lepsze zarządzanie pamięcią
 
-### Bug Fixes
-- Fixed crash when opening files with special characters
-- Resolved issue with window not maximizing correctly
-- Fixed settings not saving on first launch
+### Poprawki błędów
+- Naprawiono awarię przy otwieraniu plików ze znakami specjalnymi
+- Rozwiązano problem z zapisywaniem ustawień
 
-### Notes
-This update requires a restart to apply all changes.
+### Uwagi
+Ta aktualizacja wymaga ponownego uruchomienia.
 ```
 
 ---
 
-## GitHub Release Publishing
+## Publikowanie wydania na GitHub
 
-When publishing a new release on GitHub:
+1. Przejdź do strony **Releases** repozytorium
+2. Kliknij **Draft a new release**
+3. Utwórz nowy tag (np. `v1.0.0`)
+4. Ustaw tytuł wydania (np. `v1.0.0 - Pierwsza wersja`)
+5. Wklej notatki wydania w opisie
+6. Dołącz zbudowane instalatory (z folderu `release/`)
+7. Kliknij **Publish release**
 
-1. Go to your repository's **Releases** page
-2. Click **Draft a new release**
-3. Create a new tag (e.g., `v1.2.0`)
-4. Set the release title (e.g., `v1.2.0 - Dark Mode & Performance`)
-5. Paste your release notes in the description
-6. Attach the built installers (from `release/` folder)
-7. Click **Publish release**
-
-The auto-updater will automatically detect the new release and show the update dialog to users.
+Auto-updater automatycznie wykryje nowe wydanie i wyświetli okno aktualizacji użytkownikom.
