@@ -27,11 +27,11 @@ import {
   ResolutionPresetId,
   DEFAULTS,
 } from "@/lib/constants";
-import { BLUEPRINTS, RESOLUTION_PRESETS } from "@/lib/tabelka-blueprints";
-import type { TabelkaState } from "@/lib/schemas";
+import { BLUEPRINTS, RESOLUTION_PRESETS } from "@/lib/ass-table-blueprints";
+import type { ASSTableState } from "@/lib/schemas";
 
-interface TabelkaSettingsPanelProps {
-  state: TabelkaState;
+interface ASSTableSettingsPanelProps {
+  state: ASSTableState;
   onPresetChange: (presetId: string) => void;
   onResolutionChange: (width: number, height: number) => void;
   onSideChange: (side: TableSide) => void;
@@ -45,7 +45,7 @@ interface TabelkaSettingsPanelProps {
   onGenerate: () => void;
 }
 
-export function TabelkaSettingsPanel({
+export function ASSTableSettingsPanel({
   state,
   onPresetChange,
   onResolutionChange,
@@ -55,7 +55,7 @@ export function TabelkaSettingsPanel({
   onContentFontSizeChange,
   onSaveContent,
   onGenerate,
-}: TabelkaSettingsPanelProps) {
+}: ASSTableSettingsPanelProps) {
   const { t } = useTranslation();
 
   const isCustomResolution = state.presetId === ResolutionPresetId.Custom;

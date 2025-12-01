@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import Tabelka from "@/components/tabelka/Tabelka";
+import ASSTable from "@/components/ass-table/ASSTable";
 
 export const Route = createFileRoute("/")({
-  component: Tabelka,
+  component: ASSTable,
 });

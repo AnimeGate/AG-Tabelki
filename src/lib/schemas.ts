@@ -80,7 +80,7 @@ export const blueprintContentSchema = z.object({
 });
 
 /** Configuration for generating table ASS output */
-export const tabelkaConfigSchema = z.object({
+export const assTableConfigSchema = z.object({
   width: dimensionSchema,
   height: dimensionSchema,
   side: tableSideSchema,
@@ -97,7 +97,7 @@ export const logoConfigSchema = z.object({
 });
 
 /** Full application state */
-export const tabelkaStateSchema = z.object({
+export const assTableStateSchema = z.object({
   presetId: z.string(),
   width: dimensionSchema,
   height: dimensionSchema,
@@ -115,23 +115,23 @@ export const tabelkaStateSchema = z.object({
 
 export type Resolution = z.infer<typeof resolutionSchema>;
 export type BlueprintContent = z.infer<typeof blueprintContentSchema>;
-export type TabelkaConfig = z.infer<typeof tabelkaConfigSchema>;
+export type ASSTableConfig = z.infer<typeof assTableConfigSchema>;
 export type LogoConfig = z.infer<typeof logoConfigSchema>;
-export type TabelkaState = z.infer<typeof tabelkaStateSchema>;
+export type ASSTableState = z.infer<typeof assTableStateSchema>;
 
 // ============================================================================
 // VALIDATION HELPERS
 // ============================================================================
 
 /**
- * Validate tabelka configuration and return result
+ * Validate ASS table configuration and return result
  */
-export function validateTabelkaConfig(config: unknown): {
+export function validateASSTableConfig(config: unknown): {
   success: boolean;
-  data?: TabelkaConfig;
+  data?: ASSTableConfig;
   error?: string;
 } {
-  const result = tabelkaConfigSchema.safeParse(config);
+  const result = assTableConfigSchema.safeParse(config);
   if (result.success) {
     return { success: true, data: result.data };
   }

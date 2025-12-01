@@ -6,9 +6,9 @@
 
 import { ASS_CONFIG, TableSide } from "./constants";
 import {
-  TabelkaConfig,
+  ASSTableConfig,
   LogoConfig,
-  validateTabelkaConfig,
+  validateASSTableConfig,
   validateLogoConfig,
 } from "./schemas";
 
@@ -163,11 +163,11 @@ export function extractPlainText(assText: string): string {
  * Generate the ASS dialogue lines for a table
  * @throws Error if config is invalid
  */
-export function generateTabelka(config: TabelkaConfig): string {
+export function generateASSTable(config: ASSTableConfig): string {
   // Validate input
-  const validation = validateTabelkaConfig(config);
+  const validation = validateASSTableConfig(config);
   if (!validation.success) {
-    throw new Error(`Invalid tabelka config: ${validation.error}`);
+    throw new Error(`Invalid ASS table config: ${validation.error}`);
   }
 
   const isRight = config.side === TableSide.Right;
@@ -181,7 +181,7 @@ export function generateTabelka(config: TabelkaConfig): string {
   const description = convertToAssNewlines(config.description);
 
   const { START, END } = ASS_CONFIG.TIMING;
-  const baseName = `Tabelka - ${sideLabel} - ${config.groupName}`;
+  const baseName = `ASSTable - ${sideLabel} - ${config.groupName}`;
 
   // Build each dialogue line
   const lines: string[] = [];
@@ -284,4 +284,4 @@ export function generateLogo(config: LogoConfig): string {
 }
 
 // Re-export types for convenience
-export type { TabelkaConfig, LogoConfig };
+export type { ASSTableConfig, LogoConfig };

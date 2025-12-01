@@ -15,12 +15,12 @@ import {
 import { Check, Copy, FileText, ImageIcon, ChevronDown } from "lucide-react";
 import { cn } from "@/utils/tailwind";
 
-interface TabelkaOutputProps {
+interface ASSTableOutputProps {
   output: string;
   logoOutput: string;
 }
 
-export function TabelkaOutput({ output, logoOutput }: TabelkaOutputProps) {
+export function ASSTableOutput({ output, logoOutput }: ASSTableOutputProps) {
   const { t } = useTranslation();
   const [copiedTable, setCopiedTable] = useState(false);
   const [copiedLogo, setCopiedLogo] = useState(false);

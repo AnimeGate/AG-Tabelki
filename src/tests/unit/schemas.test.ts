@@ -10,9 +10,9 @@ import {
   titleSchema,
   contentSchema,
   descriptionSchema,
-  tabelkaConfigSchema,
+  assTableConfigSchema,
   logoConfigSchema,
-  validateTabelkaConfig,
+  validateASSTableConfig,
   validateLogoConfig,
 } from "@/lib/schemas";
 import { TableSide, LIMITS, DEFAULTS } from "@/lib/constants";
@@ -121,7 +121,7 @@ describe("schemas", () => {
   // ===========================================================================
   // Composite schema tests
   // ===========================================================================
-  describe("tabelkaConfigSchema", () => {
+  describe("assTableConfigSchema", () => {
     const validConfig = {
       width: 1920,
       height: 1080,
@@ -133,11 +133,11 @@ describe("schemas", () => {
     };
 
     it("should accept valid config", () => {
-      expect(tabelkaConfigSchema.safeParse(validConfig).success).toBe(true);
+      expect(assTableConfigSchema.safeParse(validConfig).success).toBe(true);
     });
 
     it("should reject config with invalid width", () => {
-      const result = tabelkaConfigSchema.safeParse({
+      const result = assTableConfigSchema.safeParse({
         ...validConfig,
         width: 100,
       });
@@ -145,7 +145,7 @@ describe("schemas", () => {
     });
 
     it("should reject config with invalid side", () => {
-      const result = tabelkaConfigSchema.safeParse({
+      const result = assTableConfigSchema.safeParse({
         ...validConfig,
         side: "invalid",
       });
@@ -153,7 +153,7 @@ describe("schemas", () => {
     });
 
     it("should reject config with empty groupName", () => {
-      const result = tabelkaConfigSchema.safeParse({
+      const result = assTableConfigSchema.safeParse({
         ...validConfig,
         groupName: "",
       });
@@ -162,7 +162,7 @@ describe("schemas", () => {
 
     it("should reject config with missing fields", () => {
       const { title, ...incomplete } = validConfig;
-      expect(tabelkaConfigSchema.safeParse(incomplete).success).toBe(false);
+      expect(assTableConfigSchema.safeParse(incomplete).success).toBe(false);
     });
   });
 
@@ -180,7 +180,7 @@ describe("schemas", () => {
   // ===========================================================================
   // Validation helper tests
   // ===========================================================================
-  describe("validateTabelkaConfig", () => {
+  describe("validateASSTableConfig", () => {
     const validConfig = {
       width: 1920,
       height: 1080,
@@ -192,14 +192,14 @@ describe("schemas", () => {
     };
 
     it("should return success for valid config", () => {
-      const result = validateTabelkaConfig(validConfig);
+      const result = validateASSTableConfig(validConfig);
       expect(result.success).toBe(true);
       expect(result.data).toEqual(validConfig);
       expect(result.error).toBeUndefined();
     });
 
     it("should return error message for invalid config", () => {
-      const result = validateTabelkaConfig({ ...validConfig, width: 100 });
+      const result = validateASSTableConfig({ ...validConfig, width: 100 });
       expect(result.success).toBe(false);
       expect(result.error).toBeDefined();
       expect(result.data).toBeUndefined();

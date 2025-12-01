@@ -1,5 +1,5 @@
 /**
- * Unit tests for tabelka-blueprints.ts
+ * Unit tests for ass-table-blueprints.ts
  */
 
 import { describe, it, expect, beforeEach } from "vitest";
@@ -11,10 +11,10 @@ import {
   loadSavedContent,
   saveContentForBlueprint,
   getContentForBlueprint,
-} from "@/lib/tabelka-blueprints";
+} from "@/lib/ass-table-blueprints";
 import { BlueprintId, ResolutionPresetId, STORAGE_KEYS } from "@/lib/constants";
 
-describe("tabelka-blueprints", () => {
+describe("ass-table-blueprints", () => {
   // ===========================================================================
   // BLUEPRINTS data tests
   // ===========================================================================

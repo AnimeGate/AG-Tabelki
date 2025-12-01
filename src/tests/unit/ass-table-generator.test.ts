@@ -1,22 +1,22 @@
 /**
- * Unit tests for tabelka-generator.ts
+ * Unit tests for ass-table-generator.ts
  */
 
 import { describe, it, expect } from "vitest";
 import {
-  generateTabelka,
+  generateASSTable,
   generateLogo,
   calculateScaledValues,
   stripAssTags,
   extractPlainText,
-} from "@/lib/tabelka-generator";
+} from "@/lib/ass-table-generator";
 import { TableSide } from "@/lib/constants";
 
-describe("tabelka-generator", () => {
+describe("ass-table-generator", () => {
   // ===========================================================================
-  // generateTabelka tests
+  // generateASSTable tests
   // ===========================================================================
-  describe("generateTabelka", () => {
+  describe("generateASSTable", () => {
     const validConfig = {
       width: 1920,
       height: 1080,
@@ -28,7 +28,7 @@ describe("tabelka-generator", () => {
     };
 
     it("should generate valid ASS output for left side", () => {
-      const result = generateTabelka(validConfig);
+      const result = generateASSTable(validConfig);
 
       expect(result).toContain("Dialogue:");
       expect(result).toContain("AnimeGate");
@@ -40,7 +40,7 @@ describe("tabelka-generator", () => {
     });
 
     it("should generate valid ASS output for right side", () => {
-      const result = generateTabelka({
+      const result = generateASSTable({
         ...validConfig,
         side: TableSide.Right,
       });
@@ -50,7 +50,7 @@ describe("tabelka-generator", () => {
     });
 
     it("should include all required dialogue lines", () => {
-      const result = generateTabelka(validConfig);
+      const result = generateASSTable(validConfig);
       const lines = result.split("\n");
 
       // Should have 5 dialogue lines: BG, Border, Title, Content, DSC
@@ -63,13 +63,13 @@ describe("tabelka-generator", () => {
     });
 
     it("should include fade effects", () => {
-      const result = generateTabelka(validConfig);
+      const result = generateASSTable(validConfig);
 
       expect(result).toContain("\\fade(");
     });
 
     it("should include position tags", () => {
-      const result = generateTabelka(validConfig);
+      const result = generateASSTable(validConfig);
 
       expect(result).toContain("\\pos(");
       expect(result).toContain("\\fscx");
@@ -77,7 +77,7 @@ describe("tabelka-generator", () => {
     });
 
     it("should convert newlines to ASS format", () => {
-      const result = generateTabelka({
+      const result = generateASSTable({
         ...validConfig,
         content: "Line 1\nLine 2\r\nLine 3",
       });
@@ -88,16 +88,16 @@ describe("tabelka-generator", () => {
 
     it("should throw error for invalid config", () => {
       expect(() =>
-        generateTabelka({
+        generateASSTable({
           ...validConfig,
           width: 100, // Below minimum
         })
-      ).toThrow("Invalid tabelka config");
+      ).toThrow("Invalid ASS table config");
     });
 
     it("should throw error for missing required fields", () => {
       expect(() =>
-        generateTabelka({
+        generateASSTable({
           ...validConfig,
           groupName: "", // Empty group name
         })
@@ -105,8 +105,8 @@ describe("tabelka-generator", () => {
     });
 
     it("should scale correctly for 4K resolution", () => {
-      const result1080 = generateTabelka(validConfig);
-      const result4K = generateTabelka({
+      const result1080 = generateASSTable(validConfig);
+      const result4K = generateASSTable({
         ...validConfig,
         width: 3840,
         height: 2160,

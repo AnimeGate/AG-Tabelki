@@ -1,9 +1,9 @@
-import { TabelkaSettingsPanel } from "./TabelkaSettingsPanel";
-import { TabelkaPreview } from "./TabelkaPreview";
-import { TabelkaOutput } from "./TabelkaOutput";
-import { useTabelka } from "@/hooks/useTabelka";
+import { ASSTableSettingsPanel } from "./ASSTableSettingsPanel";
+import { ASSTablePreview } from "./ASSTablePreview";
+import { ASSTableOutput } from "./ASSTableOutput";
+import { useASSTable } from "@/hooks/useASSTable";
 
-export default function Tabelka() {
+export default function ASSTable() {
   const {
     state,
     output,
@@ -17,12 +17,12 @@ export default function Tabelka() {
     saveContent,
     generate,
     previewContent,
-  } = useTabelka();
+  } = useASSTable();
 
   return (
     <div className="flex h-full flex-1 gap-4 overflow-hidden p-4">
       {/* Left Panel - Settings */}
-      <TabelkaSettingsPanel
+      <ASSTableSettingsPanel
         state={state}
         onPresetChange={setPreset}
         onResolutionChange={setResolution}
@@ -37,7 +37,7 @@ export default function Tabelka() {
       {/* Right Panel - Preview & Output */}
       <div className="flex flex-1 flex-col gap-4 overflow-hidden">
         {/* Preview */}
-        <TabelkaPreview
+        <ASSTablePreview
           width={state.width}
           height={state.height}
           side={state.side}
@@ -45,7 +45,7 @@ export default function Tabelka() {
         />
 
         {/* Output */}
-        <TabelkaOutput output={output} logoOutput={logoOutput} />
+        <ASSTableOutput output={output} logoOutput={logoOutput} />
       </div>
     </div>
   );

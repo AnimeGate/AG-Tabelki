@@ -9,9 +9,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Monitor, ImagePlus, X } from "lucide-react";
 import { TableSide } from "@/lib/constants";
-import { extractPlainText, calculateScaledValues } from "@/lib/tabelka-generator";
+import { extractPlainText, calculateScaledValues } from "@/lib/ass-table-generator";
 
-interface TabelkaPreviewProps {
+interface ASSTablePreviewProps {
   width: number;
   height: number;
   side: TableSide;
@@ -23,12 +23,12 @@ interface TabelkaPreviewProps {
   };
 }
 
-export function TabelkaPreview({
+export function ASSTablePreview({
   width,
   height,
   side,
   content,
-}: TabelkaPreviewProps) {
+}: ASSTablePreviewProps) {
   const { t } = useTranslation();
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);

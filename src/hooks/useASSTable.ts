@@ -1,5 +1,5 @@
 /**
- * Custom hook for Tabelka state management
+ * Custom hook for ASS Table state management
  * Centralizes all state logic, persistence, and generation
  */
 
@@ -16,17 +16,17 @@ import {
   getResolutionPresetById,
   getContentForBlueprint,
   saveContentForBlueprint,
-} from "@/lib/tabelka-blueprints";
-import { generateTabelka, generateLogo } from "@/lib/tabelka-generator";
-import type { TabelkaState } from "@/lib/schemas";
+} from "@/lib/ass-table-blueprints";
+import { generateASSTable, generateLogo } from "@/lib/ass-table-generator";
+import type { ASSTableState } from "@/lib/schemas";
 
 // ============================================================================
 // TYPES
 // ============================================================================
 
-export interface UseTabelkaReturn {
+export interface UseASSTableReturn {
   /** Current state */
-  state: TabelkaState;
+  state: ASSTableState;
 
   /** Generated ASS output for table */
   output: string;
@@ -71,7 +71,7 @@ export interface UseTabelkaReturn {
 // INITIAL STATE
 // ============================================================================
 
-function getInitialState(): TabelkaState {
+function getInitialState(): ASSTableState {
   const blueprintId = DEFAULTS.BLUEPRINT_ID;
   const content = getContentForBlueprint(blueprintId);
   const preset = getResolutionPresetById(DEFAULTS.RESOLUTION_PRESET_ID);
@@ -93,8 +93,8 @@ function getInitialState(): TabelkaState {
 // HOOK
 // ============================================================================
 
-export function useTabelka(): UseTabelkaReturn {
-  const [state, setState] = useState<TabelkaState>(getInitialState);
+export function useASSTable(): UseASSTableReturn {
+  const [state, setState] = useState<ASSTableState>(getInitialState);
   const [output, setOutput] = useState<string>("");
   const [logoOutput, setLogoOutput] = useState<string>("");
 
@@ -194,7 +194,7 @@ export function useTabelka(): UseTabelkaReturn {
     const styledDescription = blueprint.descriptionStyle + state.description;
 
     try {
-      const result = generateTabelka({
+      const result = generateASSTable({
         width: state.width,
         height: state.height,
         side: state.side,
@@ -216,7 +216,7 @@ export function useTabelka(): UseTabelkaReturn {
       // Auto-save content when generating
       saveContent();
     } catch (error) {
-      console.error("Failed to generate tabelka:", error);
+      console.error("Failed to generate ASS table:", error);
       setOutput(`; Error: ${error instanceof Error ? error.message : "Unknown error"}`);
       setLogoOutput("");
     }
@@ -231,7 +231,7 @@ export function useTabelka(): UseTabelkaReturn {
       title: state.title,
       content: state.content,
       description: state.description,
-      groupName: getBlueprintById(state.blueprintId)?.name ?? "Grupa",
+      groupName: getBlueprintById(state.blueprintId)?.name ?? "Group",
     };
   }, [state.blueprintId, state.title, state.content, state.description]);
 
